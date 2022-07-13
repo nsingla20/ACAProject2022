@@ -1,0 +1,45 @@
+n=int(input("n is : "))
+d=int(input("d is : "))
+message =input("type message- ")
+def isPrime(t):
+  for i in range(2,t):
+    if (t%i) == 0:
+      return False
+  return True
+def hcf(a, b):
+    c  = 0
+    while(1):
+        c = a % b
+        if (c == 0):
+            return b
+        a = b
+        b = c
+  
+for i in range(2,n):
+    if n%i==0 and isPrime(i)==1:
+        p=i
+        break
+q=int(n/p)
+phi=(p-1)*(q-1)
+e=2
+for i in range (2, phi):
+    if(hcf(i, phi) == 1 & (d*i)%phi==1):
+        e = i
+        break
+    else:
+        i = i + 1
+print("(e,n)=(",e,",",n,")")
+def to_ascii(text):
+    ascii_values = [(ord(character)-64) for character in text]
+    return ascii_values #taken from the internet
+array=to_ascii(message)
+str_f = ""
+length=len(array)
+i = 1 
+while (i<length+1):
+    str_i=str(array[i-1])
+    str_f += str_i
+    i = i + 1
+encrypt_code=int(str_f)
+c=(encrypt_code ** e)%n
+print(c)
